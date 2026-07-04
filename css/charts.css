@@ -1,0 +1,67 @@
+/* Charts and Visualizations Styles */
+
+/* SVG Map and Dots */
+.map-dot {
+    animation: pulse-dot 2s infinite;
+    transform-origin: center;
+}
+
+@keyframes pulse-dot {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* SVG Chart Path Animation */
+.chart-path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 3s ease-in-out forwards;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Heatmap Grid */
+.heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.heatmap-cell {
+    aspect-ratio: 1;
+    border-radius: 4px;
+    transition: transform 0.2s ease;
+}
+
+.heatmap-cell:hover {
+    transform: scale(1.1);
+    z-index: 10;
+}
+
+.heatmap-low {
+    background-color: rgba(0, 133, 66, 0.1);
+}
+
+.heatmap-medium {
+    background-color: rgba(245, 158, 11, 0.4);
+}
+
+.heatmap-high {
+    background-color: rgba(186, 26, 26, 0.8);
+}

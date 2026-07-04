@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MedEasy Enterprise Portal | Live Order Monitoring</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/tables.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- JS Modules -->
+    <script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/orders.js"></script>
+</head>
+
+<body class="text-on-background bg-background">
+    <!-- TopNavBar Shell -->
+    <header id="navbar-container"></header>
+
+    <div class="flex">
+        <!-- SideNav Shell -->
+        <aside id="sidebar-container"></aside>
+
+        <!-- Main Content Area -->
+        <main class="ml-0 md:ml-64 w-full p-6 md:p-10 space-y-6 overflow-x-hidden">
+            <!-- Header Section -->
+            <div>
+                <h1 class="font-headline-md text-headline-md font-bold text-primary">Live Order Monitoring</h1>
+                <p class="text-body-sm text-secondary text-xs">Track active orders, assign riders, and manage delivery
+                    status</p>
+            </div>
+
+            <!-- Kanban Board Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-start">
+                <!-- Pending Column -->
+                <div class="bg-surface-container-low p-4 rounded-2xl border border-outline-variant space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-sm text-secondary">Pending</h3>
+                        <span id="count-pending"
+                            class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold">0</span>
+                    </div>
+                    <div id="col-pending" class="space-y-3 min-h-[300px]">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Accepted Column -->
+                <div class="bg-surface-container-low p-4 rounded-2xl border border-outline-variant space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-sm text-secondary">Accepted</h3>
+                        <span id="count-accepted"
+                            class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold">0</span>
+                    </div>
+                    <div id="col-accepted" class="space-y-3 min-h-[300px]">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Preparing Column -->
+                <div class="bg-surface-container-low p-4 rounded-2xl border border-outline-variant space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-sm text-secondary">Preparing</h3>
+                        <span id="count-preparing"
+                            class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold">0</span>
+                    </div>
+                    <div id="col-preparing" class="space-y-3 min-h-[300px]">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Out for Delivery Column -->
+                <div class="bg-surface-container-low p-4 rounded-2xl border border-outline-variant space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-sm text-secondary">Out for Delivery</h3>
+                        <span id="count-out-for-delivery"
+                            class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold">0</span>
+                    </div>
+                    <div id="col-out-for-delivery" class="space-y-3 min-h-[300px]">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Delivered Column -->
+                <div class="bg-surface-container-low p-4 rounded-2xl border border-outline-variant space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-sm text-secondary">Delivered</h3>
+                        <span id="count-delivered"
+                            class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold">0</span>
+                    </div>
+                    <div id="col-delivered" class="space-y-3 min-h-[300px]">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div id="order-details-modal" class="modal-backdrop">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-headline-sm text-headline-sm font-bold">Order Details: <span id="detail-order-id"
+                        class="text-primary"></span></h3>
+                <button onclick="UI.closeModal('order-details-modal')" class="text-secondary hover:text-on-surface">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4 text-xs">
+                    <div>
+                        <p class="font-bold text-secondary">Customer</p>
+                        <p id="detail-customer" class="font-semibold"></p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-secondary">Pharmacy</p>
+                        <p id="detail-pharmacy" class="font-semibold"></p>
+                    </div>
+                </div>
+                <div class="text-xs">
+                    <p class="font-bold text-secondary">Delivery Address</p>
+                    <p id="detail-address" class="font-semibold"></p>
+                </div>
+                <div class="grid grid-cols-2 gap-4 text-xs">
+                    <div>
+                        <p class="font-bold text-secondary">Payment Method</p>
+                        <p id="detail-payment" class="font-semibold"></p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-secondary">Risk Level</p>
+                        <p id="detail-risk" class="font-semibold"></p>
+                    </div>
+                </div>
+                <div class="border-t border-outline-variant/30 pt-3">
+                    <p class="text-xs font-bold text-secondary mb-2">Order Items</p>
+                    <ul id="detail-items-list" class="space-y-1">
+                        <!-- Populated dynamically -->
+                    </ul>
+                </div>
+                <div class="grid grid-cols-2 gap-4 pt-2">
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-secondary" for="detail-status">Order Status</label>
+                        <select id="detail-status">
+                            <option value="Pending">Pending</option>
+                            <option value="Accepted">Accepted</option>
+                            <option value="Preparing">Preparing</option>
+                            <option value="Out for Delivery">Out for Delivery</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-secondary" for="detail-rider">Assigned Rider</label>
+                        <select id="detail-rider">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-2 pt-4">
+                    <button type="button" onclick="UI.closeModal('order-details-modal')"
+                        class="btn btn-secondary py-2 px-4 text-xs">Close</button>
+                    <button type="button" id="save-order-details-btn" class="btn btn-primary py-2 px-4 text-xs">Save
+                        Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

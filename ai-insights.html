@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MedEasy Enterprise Portal | AI Business Insights</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/tables.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- JS Modules -->
+    <script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/navigation.js"></script>
+</head>
+
+<body class="text-on-background bg-background">
+    <!-- TopNavBar Shell -->
+    <header id="navbar-container"></header>
+
+    <div class="flex">
+        <!-- SideNav Shell -->
+        <aside id="sidebar-container"></aside>
+
+        <!-- Main Content Area -->
+        <main class="ml-0 md:ml-64 w-full p-6 md:p-10 space-y-6 overflow-x-hidden">
+            <!-- Header Section -->
+            <div>
+                <h1 class="font-headline-md text-headline-md font-bold text-primary">AI Business Insights</h1>
+                <p class="text-body-sm text-secondary text-xs">Logistics optimization recommendations and predictive
+                    demand analysis</p>
+            </div>
+
+            <!-- Insights Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Demand Prediction -->
+                <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant space-y-4">
+                    <h3 class="font-bold text-base">Predictive Demand Analysis</h3>
+                    <p class="text-xs text-secondary">Based on historical order data, high demand is predicted in the
+                        Downtown sector tomorrow between 4 PM and 8 PM.</p>
+                    <div class="bg-primary/10 p-4 rounded-xl border border-primary/20">
+                        <p class="font-semibold text-xs text-primary">Recommendation</p>
+                        <p class="text-xs text-secondary mt-1">Pre-position 5 additional riders near Downtown pharmacies
+                            to minimize delivery times.</p>
+                    </div>
+                </div>
+
+                <!-- Logistics Optimization -->
+                <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant space-y-4">
+                    <h3 class="font-bold text-base">Logistics Core Efficiency</h3>
+                    <p class="text-xs text-secondary">Average delivery time has increased by 4.2 minutes in the East
+                        District due to road construction.</p>
+                    <div class="bg-amber-500/10 p-4 rounded-xl border border-amber-500/20">
+                        <p class="font-semibold text-xs text-amber-600">Recommendation</p>
+                        <p class="text-xs text-secondary mt-1">Adjust routing algorithms to bypass Broadway Avenue for
+                            the next 48 hours.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

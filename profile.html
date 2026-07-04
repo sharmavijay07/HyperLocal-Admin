@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MedEasy Enterprise Portal | Admin Profile</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- JS Modules -->
+    <script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/navigation.js"></script>
+</head>
+
+<body class="text-on-background bg-background">
+    <!-- TopNavBar Shell -->
+    <header id="navbar-container"></header>
+
+    <div class="flex">
+        <!-- SideNav Shell -->
+        <aside id="sidebar-container"></aside>
+
+        <!-- Main Content Area -->
+        <main class="ml-0 md:ml-64 w-full p-6 md:p-10 space-y-6 overflow-x-hidden">
+            <!-- Header Section -->
+            <div>
+                <h1 class="font-headline-md text-headline-md font-bold text-primary">Admin Profile & Settings</h1>
+                <p class="text-body-sm text-secondary text-xs">Manage your account details, preferences, and security
+                    settings</p>
+            </div>
+
+            <!-- Profile Content -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Profile Card -->
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant flex flex-col items-center text-center space-y-4">
+                    <div class="w-24 h-24 rounded-full bg-primary-fixed overflow-hidden border-2 border-primary">
+                        <img class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgmMPzU5vrYxx5drTQ2rZXFXbIlveWJvAtHPnfM7cIpralFvvkFRZ9Jha02v0yRUfsnmVxjybccnON82EZVT5dzV-eZ3VjSs5Hhb1tPWGPHLZb2l1JfmPx6NKjKKqHGtDB1Pzo1J86aEgVV_Ps5Rj-efyMkrHZfso_LYxgYqMzAaWSGg_ZzwVZpApqrJ58tSj257k4wg2Dw_PPNSWS6EXp6d7cFApkshlfrhNPWAglNPz26XvBM_x_Ktf8mnsVIkjzho0reYHZRs"
+                            alt="Profile" />
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg">Dr. Sarah Jenkins</h3>
+                        <p class="text-xs text-secondary">Super Admin | Logistics Core</p>
+                    </div>
+                    <button onclick="Auth.logout()" class="btn btn-danger text-xs py-2 w-full">
+                        <span class="material-symbols-outlined text-sm">logout</span>
+                        Logout Account
+                    </button>
+                </div>
+
+                <!-- Preferences & Security -->
+                <div
+                    class="md:col-span-2 bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant space-y-6">
+                    <h3 class="font-bold text-sm text-secondary uppercase tracking-wider">Preferences</h3>
+
+                    <div
+                        class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-outline-variant/50">
+                        <div>
+                            <p class="font-semibold text-sm">Dark Mode Theme</p>
+                            <p class="text-xs text-secondary">Toggle between light and dark interface themes</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="dark-mode-toggle" onchange="UI.toggleDarkMode()" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h3 class="font-bold text-sm text-secondary uppercase tracking-wider">System Navigation</h3>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="window.location.href='audit-logs.html'"
+                                class="btn btn-secondary text-xs py-2 justify-start">
+                                <span class="material-symbols-outlined text-sm">history</span>
+                                View Audit Logs
+                            </button>
+                            <button onclick="window.location.href='roles.html'"
+                                class="btn btn-secondary text-xs py-2 justify-start">
+                                <span class="material-symbols-outlined text-sm">admin_panel_settings</span>
+                                Manage Roles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Sync dark mode toggle state on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.getElementById('dark-mode-toggle');
+            if (toggle) {
+                toggle.checked = document.documentElement.classList.contains('dark');
+            }
+        });
+    </script>
+</body>
+
+</html>

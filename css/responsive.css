@@ -1,0 +1,28 @@
+/* Responsive Overrides */
+
+@media (max-width: 1024px) {
+    .grid-cols-5 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .grid-cols-5 {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 90%;
+        margin: 16px;
+        padding: 16px;
+    }
+
+    header {
+        height: 56px;
+    }
+
+    aside {
+        top: 56px;
+        height: calc(100vh - 56px);
+    }
+}

@@ -1,0 +1,73 @@
+/* Tables and Data Grids Styles */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th {
+    background-color: var(--surface-container-low);
+    color: var(--secondary);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--outline-variant);
+}
+
+td {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--outline-variant);
+    font-size: 14px;
+    color: var(--on-background);
+    transition: background-color 0.2s ease;
+}
+
+tr.hoverable:hover {
+    background-color: var(--surface-container-low);
+    cursor: pointer;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background-color: var(--surface-container-lowest);
+    border-top: 1px solid var(--outline-variant);
+}
+
+.pagination-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.pagination-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--outline-variant);
+    background-color: var(--surface-container-lowest);
+    color: var(--on-surface);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: var(--surface-container-low);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-btn.active {
+    background-color: var(--primary-container);
+    color: var(--on-primary-container);
+    border-color: var(--primary-container);
+}

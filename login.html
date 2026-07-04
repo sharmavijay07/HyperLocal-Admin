@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MedEasy | Secure Admin Login</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <style>
+        .login-card {
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05), 0px 4px 6px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .login-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.05), 0px 4px 6px -2px rgba(0, 0, 0, 0.02);
+        }
+
+        .input-focus-ring:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 133, 66, 0.2);
+            border-color: #008542;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen text-on-surface bg-background">
+    <!-- Main Content Area -->
+    <main class="flex-grow flex items-center justify-center p-4 md:p-0 ml-0 w-full min-h-screen">
+        <div class="w-full max-w-[440px]">
+            <!-- Login Card -->
+            <section
+                class="login-card bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden p-8">
+                <!-- Branding Header -->
+                <div class="flex flex-col items-center mb-8">
+                    <div class="w-16 h-16 bg-primary-container/10 rounded-full flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-primary text-[40px]"
+                            style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+                    </div>
+                    <h1 class="font-headline-md text-headline-md text-primary tracking-tight font-extrabold">MedEasy
+                    </h1>
+                    <p class="font-label-md text-label-md text-on-surface-variant mt-1">Secure Healthcare Logistics
+                        Portal</p>
+                </div>
+                <!-- Form Section -->
+                <form id="login-form" class="space-y-6" onsubmit="handleLogin(event)">
+                    <div class="space-y-2">
+                        <label class="font-label-md text-label-md text-on-surface" for="admin-id">Admin ID or
+                            Email</label>
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">person</span>
+                            <input
+                                class="w-full pl-12 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md text-body-md input-focus-ring transition-all"
+                                id="admin-id" placeholder="e.g. admin@medeasy.com" type="text" required />
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <label class="font-label-md text-label-md text-on-surface" for="password">Password</label>
+                            <a class="font-label-sm text-label-sm text-primary hover:underline transition-colors"
+                                href="#"
+                                onclick="UI.showToast('Please contact system administrator to reset password.', 'warning')">Forgot
+                                Password?</a>
+                        </div>
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">lock</span>
+                            <input
+                                class="w-full pl-12 pr-12 py-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md text-body-md input-focus-ring transition-all"
+                                id="password" placeholder="••••••••" type="password" required />
+                            <button
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface"
+                                type="button" id="toggle-password">
+                                <span class="material-symbols-outlined text-[20px]">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 pt-2">
+                        <input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary/20"
+                            id="remember" type="checkbox" />
+                        <label class="font-body-sm text-body-sm text-on-surface-variant" for="remember">Remember this
+                            device for 30 days</label>
+                    </div>
+                    <button
+                        class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-4 rounded-lg flex items-center justify-center gap-2 hover:bg-primary transition-all active:scale-[0.98] mt-6"
+                        type="submit">
+                        Login
+                        <span class="material-symbols-outlined">login</span>
+                    </button>
+                </form>
+                <div class="mt-6 pt-6 border-t border-outline-variant flex flex-col items-center">
+                    <p class="font-body-sm text-body-sm text-on-surface-variant text-center mb-4">
+                        Authorized medical staff only. All login attempts are logged and monitored for security
+                        purposes.
+                    </p>
+                    <div class="flex gap-4">
+                        <div class="flex items-center gap-1 text-on-surface-variant">
+                            <span class="material-symbols-outlined text-[16px]">verified_user</span>
+                            <span class="text-label-sm font-label-sm">2FA Required</span>
+                        </div>
+                        <div class="flex items-center gap-1 text-on-surface-variant">
+                            <span class="material-symbols-outlined text-[16px]">encrypted</span>
+                            <span class="text-label-sm font-label-sm">SSL Secure</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="w-full max-w-max-width mx-auto px-10 py-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="font-body-sm text-body-sm text-on-surface-variant">
+                © 2026 MedEasy Global Logistics Inc. All rights reserved.
+            </p>
+            <nav class="flex items-center gap-6">
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Terms of Service</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Privacy Policy</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Support</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Security Audit</a>
+            </nav>
+        </div>
+    </footer>
+    <!-- Side Decoration (Hidden on small screens) -->
+    <div class="hidden lg:block fixed left-12 bottom-12 max-w-[280px]">
+        <div class="p-6 bg-surface-container/50 backdrop-blur-md rounded-xl border border-outline-variant">
+            <h3 class="font-label-md text-label-md text-primary mb-2">System Status</h3>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-body-sm font-body-sm text-on-surface-variant">Logistics Core</span>
+                    <span class="flex items-center gap-1 text-primary-container text-[12px] font-bold">
+                        <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+                        Operational
+                    </span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-body-sm font-body-sm text-on-surface-variant">Cold Chain API</span>
+                    <span class="flex items-center gap-1 text-primary-container text-[12px] font-bold">
+                        <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+                        Operational
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Micro-interaction for password visibility
+        const toggleBtn = document.getElementById('toggle-password');
+        const passwordInput = document.getElementById('password');
+
+        toggleBtn.addEventListener('click', () => {
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            toggleBtn.querySelector('span').textContent = isPassword ? 'visibility_off' : 'visibility';
+        });
+
+        // Subtle parallax effect on the login card based on mouse movement
+        const card = document.querySelector('.login-card');
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) translateY(-2px)`;
+            }
+        });
+
+        document.addEventListener('mouseleave', () => {
+            card.style.transform = `rotateY(0deg) rotateX(0deg) translateY(0px)`;
+        });
+
+        // Handle Login Submission
+        function handleLogin(e) {
+            e.preventDefault();
+            const adminId = document.getElementById('admin-id').value;
+            const password = document.getElementById('password').value;
+
+            if (window.Auth) {
+                const result = window.Auth.login(adminId, password);
+                if (result.success) {
+                    if (window.UI) {
+                        window.UI.showToast('Login successful! Redirecting...', 'success');
+                    }
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1000);
+                } else {
+                    if (window.UI) {
+                        window.UI.showToast(result.message, 'error');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

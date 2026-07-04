@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MedEasy Enterprise Portal | Configuration Rules</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- JS Modules -->
+    <script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/settings.js"></script>
+</head>
+
+<body class="text-on-background bg-background">
+    <!-- TopNavBar Shell -->
+    <header id="navbar-container"></header>
+
+    <div class="flex">
+        <!-- SideNav Shell -->
+        <aside id="sidebar-container"></aside>
+
+        <!-- Main Content Area -->
+        <main class="ml-0 md:ml-64 w-full p-6 md:p-10 space-y-6 overflow-x-hidden">
+            <!-- Header Section -->
+            <div>
+                <h1 class="font-headline-md text-headline-md font-bold text-primary">Logistics & Pricing Rules</h1>
+                <p class="text-body-sm text-secondary text-xs">Configure delivery radius, pricing parameters, and rider
+                    assignment logic</p>
+            </div>
+
+            <!-- Settings Form -->
+            <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant max-w-2xl">
+                <form id="settings-form" onsubmit="Settings.saveSettings(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-secondary" for="setting-radius">Maximum Delivery Radius
+                                (km)</label>
+                            <input type="number" id="setting-radius" step="0.1" required />
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-secondary" for="setting-max-distance">Maximum Rider
+                                Assignment Distance (km)</label>
+                            <input type="number" id="setting-max-distance" step="0.1" required />
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-secondary" for="setting-base-charge">Base Delivery
+                                Charge ($)</label>
+                            <input type="number" id="setting-base-charge" step="0.01" required />
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-secondary" for="setting-km-charge">Charge Per Kilometer
+                                ($)</label>
+                            <input type="number" id="setting-km-charge" step="0.01" required />
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-secondary" for="setting-commission">Platform Commission
+                                Rate (%)</label>
+                            <input type="number" id="setting-commission" step="0.1" required />
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-outline-variant/50">
+                        <div>
+                            <p class="font-semibold text-sm">Auto-Assign Riders</p>
+                            <p class="text-xs text-secondary">Automatically match pending orders with the nearest active
+                                rider</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-auto-assign" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="flex justify-end pt-4">
+                        <button type="submit" class="btn btn-primary py-2 px-6 text-xs">Save Configuration</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

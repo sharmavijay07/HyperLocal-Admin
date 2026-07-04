@@ -1,0 +1,92 @@
+{
+    "kpis": {
+        "totalOrders": 4520,
+        "activeRiders": 48,
+        "activePharmacies": 32,
+        "totalRevenue": 67800.50,
+        "avgDeliveryTime": 24.5,
+        "completionRate": 98.2
+    },
+    "revenueTrend": [
+        {
+            "date": "2026-06-28",
+            "revenue": 8200
+        },
+        {
+            "date": "2026-06-29",
+            "revenue": 9100
+        },
+        {
+            "date": "2026-06-30",
+            "revenue": 8800
+        },
+        {
+            "date": "2026-07-01",
+            "revenue": 9500
+        },
+        {
+            "date": "2026-07-02",
+            "revenue": 10200
+        },
+        {
+            "date": "2026-07-03",
+            "revenue": 11000
+        },
+        {
+            "date": "2026-07-04",
+            "revenue": 12000
+        }
+    ],
+    "orderTrend": [
+        {
+            "date": "2026-06-28",
+            "orders": 520
+        },
+        {
+            "date": "2026-06-29",
+            "orders": 580
+        },
+        {
+            "date": "2026-06-30",
+            "orders": 550
+        },
+        {
+            "date": "2026-07-01",
+            "orders": 610
+        },
+        {
+            "date": "2026-07-02",
+            "orders": 640
+        },
+        {
+            "date": "2026-07-03",
+            "orders": 690
+        },
+        {
+            "date": "2026-07-04",
+            "orders": 750
+        }
+    ],
+    "topPharmacies": [
+        {
+            "name": "Care Pharmacy",
+            "orders": 1240,
+            "revenue": 18600.50
+        },
+        {
+            "name": "Apex Meds",
+            "orders": 850,
+            "revenue": 12750.00
+        },
+        {
+            "name": "Metro Pharmacy",
+            "orders": 2100,
+            "revenue": 31500.00
+        }
+    ],
+    "riderStatus": {
+        "online": 35,
+        "busy": 10,
+        "offline": 3
+    }
+}

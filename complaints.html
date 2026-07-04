@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MedEasy Enterprise Portal | Complaints Management</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- CSS Stylesheets -->
+    <link class="light" rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/tables.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- JS Modules -->
+    <script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/navigation.js"></script>
+</head>
+
+<body class="text-on-background bg-background">
+    <!-- TopNavBar Shell -->
+    <header id="navbar-container"></header>
+
+    <div class="flex">
+        <!-- SideNav Shell -->
+        <aside id="sidebar-container"></aside>
+
+        <!-- Main Content Area -->
+        <main class="ml-0 md:ml-64 w-full p-6 md:p-10 space-y-6 overflow-x-hidden">
+            <!-- Header Section -->
+            <div>
+                <h1 class="font-headline-md text-headline-md font-bold text-primary">Customer Complaints</h1>
+                <p class="text-body-sm text-secondary text-xs">Manage customer tickets, refund requests, and rider
+                    disputes</p>
+            </div>
+
+            <!-- Tickets Table -->
+            <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden">
+                <div class="p-6 border-b border-outline-variant">
+                    <h3 class="font-bold text-base">Active Support Tickets</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-surface-container-low text-secondary font-label-sm uppercase tracking-wider text-xs">
+                                <th class="px-6 py-4">Ticket ID</th>
+                                <th class="px-6 py-4">Customer</th>
+                                <th class="px-6 py-4">Subject</th>
+                                <th class="px-6 py-4">Status</th>
+                                <th class="px-6 py-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant" id="complaints-tbody">
+                            <!-- Mocked data for tickets -->
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-6 py-4 font-bold text-primary">TKT-821</td>
+                                <td class="px-6 py-4 font-semibold">David Miller</td>
+                                <td class="px-6 py-4 text-xs text-secondary">Medicine packaging was damaged upon
+                                    arrival.</td>
+                                <td class="px-6 py-4"><span class="badge badge-pending">Open</span></td>
+                                <td class="px-6 py-4 text-right">
+                                    <button onclick="resolveTicket('TKT-821')"
+                                        class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary-container transition-colors">
+                                        Resolve
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-6 py-4 font-bold text-primary">TKT-822</td>
+                                <td class="px-6 py-4 font-semibold">Emily Watson</td>
+                                <td class="px-6 py-4 text-xs text-secondary">Rider was rude during delivery handoff.
+                                </td>
+                                <td class="px-6 py-4"><span class="badge badge-pending">Open</span></td>
+                                <td class="px-6 py-4 text-right">
+                                    <button onclick="resolveTicket('TKT-822')"
+                                        class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary-container transition-colors">
+                                        Resolve
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function resolveTicket(id) {
+            window.AppStorage.logAction('Resolve Ticket', `Resolved support ticket ${id}`);
+            window.UI.showToast(`Ticket ${id} resolved successfully.`, 'success');
+
+            // Simulating removal of resolved ticket
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

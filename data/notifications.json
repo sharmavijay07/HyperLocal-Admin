@@ -1,0 +1,29 @@
+[
+    {
+        "id": "NT-001",
+        "title": "Scheduled System Maintenance",
+        "message": "The MedEasy Admin Portal will undergo scheduled maintenance on July 10, 2026, from 02:00 to 04:00 UTC. Some services may be temporarily unavailable.",
+        "target": "All",
+        "type": "System",
+        "dateSent": "2026-07-04T12:00:00Z",
+        "sentBy": "System Admin"
+    },
+    {
+        "id": "NT-002",
+        "title": "New Rider Bonus Program",
+        "message": "Earn an extra $2 per delivery during peak hours (18:00 - 21:00) this weekend! Check the rider app for details.",
+        "target": "Riders",
+        "type": "Promotion",
+        "dateSent": "2026-07-03T15:30:00Z",
+        "sentBy": "Marketing Admin"
+    },
+    {
+        "id": "NT-003",
+        "title": "Updated Narcotics Dispensing Guidelines",
+        "message": "Please review the updated compliance guidelines for dispensing controlled substances. Verification of prescription is mandatory before handoff.",
+        "target": "Pharmacies",
+        "type": "Warning",
+        "dateSent": "2026-07-02T09:15:00Z",
+        "sentBy": "Compliance Officer"
+    }
+]

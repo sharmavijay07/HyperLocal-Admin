@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MedEasy Enterprise Portal | Inventory Management</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/tables.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- JS Modules -->
+    <script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/navigation.js"></script>
+</head>
+
+<body class="text-on-background bg-background">
+    <!-- TopNavBar Shell -->
+    <header id="navbar-container"></header>
+
+    <div class="flex">
+        <!-- SideNav Shell -->
+        <aside id="sidebar-container"></aside>
+
+        <!-- Main Content Area -->
+        <main class="ml-0 md:ml-64 w-full p-6 md:p-10 space-y-6 overflow-x-hidden">
+            <!-- Header Section -->
+            <div>
+                <h1 class="font-headline-md text-headline-md font-bold text-primary">Global Medicine Inventory</h1>
+                <p class="text-body-sm text-secondary text-xs">Monitor medicine stock levels and availability across all
+                    onboarded pharmacies</p>
+            </div>
+
+            <!-- Inventory Table -->
+            <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden">
+                <div class="p-6 border-b border-outline-variant">
+                    <h3 class="font-bold text-base">Stock Levels</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-surface-container-low text-secondary font-label-sm uppercase tracking-wider text-xs">
+                                <th class="px-6 py-4">Medicine Name</th>
+                                <th class="px-6 py-4">Category</th>
+                                <th class="px-6 py-4">Pharmacy</th>
+                                <th class="px-6 py-4">Stock Status</th>
+                                <th class="px-6 py-4 text-right">Available Qty</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant">
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-6 py-4 font-semibold">Amoxicillin 500mg</td>
+                                <td class="px-6 py-4">Antibiotics</td>
+                                <td class="px-6 py-4 text-xs text-secondary">City Center Pharmacy</td>
+                                <td class="px-6 py-4"><span class="badge badge-active">In Stock</span></td>
+                                <td class="px-6 py-4 text-right font-bold">120 units</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-6 py-4 font-semibold">Paracetamol 500mg</td>
+                                <td class="px-6 py-4">Analgesics</td>
+                                <td class="px-6 py-4 text-xs text-secondary">Metro Care Drugs</td>
+                                <td class="px-6 py-4"><span class="badge badge-pending">Low Stock</span></td>
+                                <td class="px-6 py-4 text-right font-bold text-amber-500">15 units</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-6 py-4 font-semibold">Insulin Glargine</td>
+                                <td class="px-6 py-4">Antidiabetics</td>
+                                <td class="px-6 py-4 text-xs text-secondary">Wellness Pharmacy</td>
+                                <td class="px-6 py-4"><span class="badge badge-suspended">Out of Stock</span></td>
+                                <td class="px-6 py-4 text-right font-bold text-error">0 units</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

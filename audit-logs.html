@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MedEasy Enterprise Portal | Audit Logs</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/tables.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- JS Modules -->
+    <script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/navigation.js"></script>
+</head>
+
+<body class="text-on-background bg-background">
+    <!-- TopNavBar Shell -->
+    <header id="navbar-container"></header>
+
+    <div class="flex">
+        <!-- SideNav Shell -->
+        <aside id="sidebar-container"></aside>
+
+        <!-- Main Content Area -->
+        <main class="ml-0 md:ml-64 w-full p-6 md:p-10 space-y-6 overflow-x-hidden">
+            <!-- Header Section -->
+            <div class="flex items-center gap-4">
+                <button onclick="window.location.href='profile.html'" class="text-secondary hover:text-primary p-1">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <div>
+                    <h1 class="font-headline-md text-headline-md font-bold text-primary">System Audit Logs</h1>
+                    <p class="text-body-sm text-secondary text-xs">Timeline of all administrative actions and system
+                        events</p>
+                </div>
+            </div>
+
+            <!-- Logs Timeline -->
+            <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-surface-container-low text-secondary font-label-sm uppercase tracking-wider text-xs">
+                                <th class="px-6 py-4">Timestamp</th>
+                                <th class="px-6 py-4">Action</th>
+                                <th class="px-6 py-4">Details</th>
+                                <th class="px-6 py-4">User</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant" id="audit-logs-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tbody = document.getElementById('audit-logs-tbody');
+            if (!tbody) return;
+
+            const logs = window.AppStorage.get('audit_logs') || [];
+            tbody.innerHTML = '';
+
+            if (logs.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center py-8 text-secondary">No audit logs found.</td></tr>`;
+                return;
+            }
+
+            logs.forEach(log => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-surface-container-low transition-colors';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 text-xs text-secondary">${new Date(log.timestamp).toLocaleString()}</td>
+                    <td class="px-6 py-4 font-semibold text-sm">${log.action}</td>
+                    <td class="px-6 py-4 text-sm">${log.details}</td>
+                    <td class="px-6 py-4 text-xs font-bold text-primary">${log.user}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    </script>
+</body>
+
+</html>

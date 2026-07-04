@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MedEasy Enterprise Portal | Pharmacy Management</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/tables.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- JS Modules -->
+    <script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/pharmacy.js"></script>
+</head>
+
+<body class="text-on-background bg-background">
+    <!-- TopNavBar Shell -->
+    <header id="navbar-container"></header>
+
+    <div class="flex">
+        <!-- SideNav Shell -->
+        <aside id="sidebar-container"></aside>
+
+        <!-- Main Content Area -->
+        <main class="ml-0 md:ml-64 w-full p-6 md:p-10 space-y-6 overflow-x-hidden">
+            <!-- Header Section -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h1 class="font-headline-md text-headline-md font-bold text-primary">Pharmacy Directory</h1>
+                    <p class="text-body-sm text-secondary text-xs">Manage onboarded pharmacies, status, and credentials
+                    </p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="window.location.href='pharmacy-verification.html'"
+                        class="btn btn-secondary text-xs py-2">
+                        <span class="material-symbols-outlined text-sm">verified_user</span>
+                        Verification Queue
+                    </button>
+                    <button onclick="Pharmacy.openAddModal()" class="btn btn-primary text-xs py-2">
+                        <span class="material-symbols-outlined text-sm">add</span>
+                        Add Pharmacy
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filters Section -->
+            <div
+                class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant flex flex-col sm:flex-row gap-4 justify-between items-center">
+                <div
+                    class="flex items-center bg-surface-container rounded-lg px-3 py-2 w-full sm:w-80 border border-outline-variant/30">
+                    <span class="material-symbols-outlined text-outline mr-2 text-sm">search</span>
+                    <input id="pharmacy-search" class="bg-transparent border-none focus:ring-0 text-xs w-full p-0"
+                        placeholder="Search by name, owner, license..." type="text" />
+                </div>
+                <div class="flex gap-2 w-full sm:w-auto justify-end">
+                    <select id="status-filter"
+                        class="bg-surface-container-low border border-outline-variant rounded-lg text-xs py-2 px-3 w-40">
+                        <option value="All">All Statuses</option>
+                        <option value="Active">Active</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Suspended">Suspended</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Table Container -->
+            <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-surface-container-low text-secondary font-label-sm uppercase tracking-wider text-xs">
+                                <th class="px-6 py-4">ID</th>
+                                <th class="px-6 py-4">Pharmacy</th>
+                                <th class="px-6 py-4">Owner</th>
+                                <th class="px-6 py-4">License</th>
+                                <th class="px-6 py-4">Status</th>
+                                <th class="px-6 py-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant" id="pharmacy-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination -->
+                <div class="pagination" id="pagination-container">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div id="pharmacy-modal" class="modal-backdrop">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-headline-sm text-headline-sm font-bold" id="modal-title">Add New Pharmacy</h3>
+                <button onclick="UI.closeModal('pharmacy-modal')" class="text-secondary hover:text-on-surface">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <form id="pharmacy-form" onsubmit="Pharmacy.savePharmacy(event)" class="space-y-4">
+                <input type="hidden" id="pharmacy-id" />
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-secondary" for="pharmacy-name">Pharmacy Name</label>
+                    <input type="text" id="pharmacy-name" required />
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-secondary" for="pharmacy-owner">Owner Name</label>
+                    <input type="text" id="pharmacy-owner" required />
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-secondary" for="pharmacy-email">Email</label>
+                        <input type="email" id="pharmacy-email" required />
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-secondary" for="pharmacy-phone">Phone</label>
+                        <input type="tel" id="pharmacy-phone" required />
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-secondary" for="pharmacy-license">License Number</label>
+                        <input type="text" id="pharmacy-license" required />
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-secondary" for="pharmacy-status">Status</label>
+                        <select id="pharmacy-status">
+                            <option value="Active">Active</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Suspended">Suspended</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-secondary" for="pharmacy-address">Address</label>
+                    <textarea id="pharmacy-address" rows="2" required></textarea>
+                </div>
+                <div class="flex justify-end gap-2 pt-4">
+                    <button type="button" onclick="UI.closeModal('pharmacy-modal')"
+                        class="btn btn-secondary py-2 px-4 text-xs">Cancel</button>
+                    <button type="submit" class="btn btn-primary py-2 px-4 text-xs">Save Pharmacy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

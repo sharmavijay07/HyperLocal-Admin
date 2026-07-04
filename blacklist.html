@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MedEasy Enterprise Portal | Blacklist Management</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/tables.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- JS Modules -->
+    <script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/navigation.js"></script>
+</head>
+
+<body class="text-on-background bg-background">
+    <!-- TopNavBar Shell -->
+    <header id="navbar-container"></header>
+
+    <div class="flex">
+        <!-- SideNav Shell -->
+        <aside id="sidebar-container"></aside>
+
+        <!-- Main Content Area -->
+        <main class="ml-0 md:ml-64 w-full p-6 md:p-10 space-y-6 overflow-x-hidden">
+            <!-- Header Section -->
+            <div class="flex items-center gap-4">
+                <button onclick="window.location.href='fraud-detection.html'"
+                    class="text-secondary hover:text-primary p-1">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <div>
+                    <h1 class="font-headline-md text-headline-md font-bold text-primary">System Blacklist</h1>
+                    <p class="text-body-sm text-secondary text-xs">Manage blocked customers, riders, or pharmacies to
+                        prevent fraud</p>
+                </div>
+            </div>
+
+            <!-- Blacklist Table -->
+            <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden">
+                <div class="p-6 border-b border-outline-variant flex justify-between items-center">
+                    <h3 class="font-bold text-base">Blocked Entities</h3>
+                    <button onclick="addBlacklist()" class="btn btn-primary text-xs py-2">
+                        <span class="material-symbols-outlined text-sm">add</span>
+                        Block Entity
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-surface-container-low text-secondary font-label-sm uppercase tracking-wider text-xs">
+                                <th class="px-6 py-4">Entity ID</th>
+                                <th class="px-6 py-4">Type</th>
+                                <th class="px-6 py-4">Reason</th>
+                                <th class="px-6 py-4">Blocked Date</th>
+                                <th class="px-6 py-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-6 py-4 font-bold text-primary">CUST-402</td>
+                                <td class="px-6 py-4">Customer</td>
+                                <td class="px-6 py-4 text-xs text-secondary">Multiple chargebacks and fake orders.</td>
+                                <td class="px-6 py-4 text-xs">2026-05-12</td>
+                                <td class="px-6 py-4 text-right">
+                                    <button onclick="unblockEntity('CUST-402')"
+                                        class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary-container transition-colors">
+                                        Unblock
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function addBlacklist() {
+            const id = prompt("Enter Entity ID to block (e.g. CUST-123):");
+            if (id) {
+                window.AppStorage.logAction('Add Blacklist', `Blocked entity ${id}`);
+                window.UI.showToast(`Entity ${id} blocked successfully.`, 'success');
+            }
+        }
+
+        function unblockEntity(id) {
+            window.AppStorage.logAction('Remove Blacklist', `Unblocked entity ${id}`);
+            window.UI.showToast(`Entity ${id} unblocked successfully.`, 'success');
+            setTimeout(() => window.location.reload(), 1000);
+        }
+    </script>
+</body>
+
+</html>

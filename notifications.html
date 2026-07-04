@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MedEasy Enterprise Portal | Broadcast Notifications</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/tables.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- JS Modules -->
+    <script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/navigation.js"></script>
+</head>
+
+<body class="text-on-background bg-background">
+    <!-- TopNavBar Shell -->
+    <header id="navbar-container"></header>
+
+    <div class="flex">
+        <!-- SideNav Shell -->
+        <aside id="sidebar-container"></aside>
+
+        <!-- Main Content Area -->
+        <main class="ml-0 md:ml-64 w-full p-6 md:p-10 space-y-6 overflow-x-hidden">
+            <!-- Header Section -->
+            <div>
+                <h1 class="font-headline-md text-headline-md font-bold text-primary">Broadcast Notifications</h1>
+                <p class="text-body-sm text-secondary text-xs">Send system alerts, weather warnings, or policy updates
+                    to riders and pharmacies</p>
+            </div>
+
+            <!-- Broadcast Form -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant">
+                    <form id="broadcast-form" onsubmit="sendBroadcast(event)" class="space-y-4">
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-secondary" for="broadcast-title">Title</label>
+                            <input type="text" id="broadcast-title" required
+                                placeholder="e.g. Extreme Weather Warning" />
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-secondary" for="broadcast-target">Target
+                                    Audience</label>
+                                <select id="broadcast-target">
+                                    <option value="All">All Users</option>
+                                    <option value="Riders">Riders Only</option>
+                                    <option value="Pharmacies">Pharmacies Only</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-secondary" for="broadcast-type">Alert Type</label>
+                                <select id="broadcast-type">
+                                    <option value="Info">Information</option>
+                                    <option value="Warning">Warning</option>
+                                    <option value="Critical">Critical Alert</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-secondary" for="broadcast-message">Message</label>
+                            <textarea id="broadcast-message" rows="4" required
+                                placeholder="Type your broadcast message here..."></textarea>
+                        </div>
+                        <div class="flex justify-end pt-2">
+                            <button type="submit" class="btn btn-primary py-2 px-6 text-xs">
+                                <span class="material-symbols-outlined text-sm">send</span>
+                                Send Broadcast
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Recent Broadcasts -->
+                <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant">
+                    <h3 class="font-bold text-sm text-secondary mb-4 uppercase tracking-wider">Recent Broadcasts</h3>
+                    <div class="space-y-4" id="recent-broadcasts-container">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function loadBroadcasts() {
+            const container = document.getElementById('recent-broadcasts-container');
+            if (!container) return;
+
+            const notifications = window.AppStorage.get('notifications') || [];
+            container.innerHTML = '';
+
+            if (notifications.length === 0) {
+                container.innerHTML = `<p class="text-center text-secondary py-4 text-xs">No recent broadcasts.</p>`;
+                return;
+            }
+
+            notifications.forEach(n => {
+                let badgeClass = 'badge-inactive';
+                if (n.type === 'Critical') badgeClass = 'badge-suspended';
+                else if (n.type === 'Warning') badgeClass = 'badge-pending';
+                else if (n.type === 'Info') badgeClass = 'badge-active';
+
+                const div = document.createElement('div');
+                div.className = 'p-3 bg-surface-container-low rounded-xl border border-outline-variant/30 space-y-2';
+                div.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="badge ${badgeClass} text-[10px]">${n.type}</span>
+                        <span class="text-[10px] text-secondary font-bold">${new Date(n.timestamp).toLocaleDateString()}</span>
+                    </div>
+                    <h4 class="font-bold text-xs">${n.title}</h4>
+                    <p class="text-[11px] text-secondary leading-tight">${n.message}</p>
+                    <p class="text-[9px] text-outline font-bold uppercase">To: ${n.target}</p>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function sendBroadcast(e) {
+            e.preventDefault();
+            const title = document.getElementById('broadcast-title').value;
+            const target = document.getElementById('broadcast-target').value;
+            const type = document.getElementById('broadcast-type').value;
+            const message = document.getElementById('broadcast-message').value;
+
+            const newNotification = {
+                id: 'NT-' + Date.now(),
+                title,
+                target,
+                type,
+                message,
+                timestamp: new Date().toISOString()
+            };
+
+            window.AppStorage.addToList('notifications', newNotification);
+            window.AppStorage.logAction('Send Broadcast', `Sent alert "${title}" to ${target}`);
+            window.UI.showToast('Broadcast sent successfully!', 'success');
+
+            document.getElementById('broadcast-form').reset();
+            loadBroadcasts();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadBroadcasts();
+        });
+    </script>
+</body>
+
+</html>

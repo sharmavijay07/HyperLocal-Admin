@@ -1,0 +1,107 @@
+[
+    {
+        "id": "RD-001",
+        "name": "Alex Rivera",
+        "email": "alex.r@medeasy-rider.com",
+        "phone": "+1 (555) 019-5543",
+        "vehicleType": "Motorcycle",
+        "vehicleNumber": "MC-2023-NY",
+        "status": "Active",
+        "verification": "Verified",
+        "rating": 4.9,
+        "ordersCompleted": 342,
+        "earnings": 1710.00,
+        "lat": 37.7749,
+        "lng": -122.4194,
+        "joinedDate": "2024-02-10",
+        "documents": {
+            "license": "Verified",
+            "backgroundCheck": "Verified",
+            "insurance": "Verified"
+        }
+    },
+    {
+        "id": "RD-002",
+        "name": "Jordan Smith",
+        "email": "jordan.s@medeasy-rider.com",
+        "phone": "+1 (555) 011-2233",
+        "vehicleType": "E-Bike",
+        "vehicleNumber": "EB-9982-SF",
+        "status": "Active",
+        "verification": "Verified",
+        "rating": 4.7,
+        "ordersCompleted": 188,
+        "earnings": 940.00,
+        "lat": 37.7894,
+        "lng": -122.4014,
+        "joinedDate": "2024-04-18",
+        "documents": {
+            "license": "Verified",
+            "backgroundCheck": "Verified",
+            "insurance": "Verified"
+        }
+    },
+    {
+        "id": "RD-003",
+        "name": "Taylor Brooks",
+        "email": "taylor.b@medeasy-rider.com",
+        "phone": "+1 (555) 018-4455",
+        "vehicleType": "Bicycle",
+        "vehicleNumber": "N/A",
+        "status": "Pending",
+        "verification": "Pending",
+        "rating": 0.0,
+        "ordersCompleted": 0,
+        "earnings": 0.00,
+        "lat": 37.7522,
+        "lng": -122.4215,
+        "joinedDate": "2026-07-02",
+        "documents": {
+            "license": "Pending",
+            "backgroundCheck": "Pending",
+            "insurance": "N/A"
+        }
+    },
+    {
+        "id": "RD-004",
+        "name": "Morgan Lee",
+        "email": "morgan.l@medeasy-rider.com",
+        "phone": "+1 (555) 012-8899",
+        "vehicleType": "Motorcycle",
+        "vehicleNumber": "MC-8812-NY",
+        "status": "Suspended",
+        "verification": "Verified",
+        "rating": 4.1,
+        "ordersCompleted": 520,
+        "earnings": 2600.00,
+        "lat": 40.7306,
+        "lng": -73.9352,
+        "joinedDate": "2023-08-15",
+        "documents": {
+            "license": "Verified",
+            "backgroundCheck": "Verified",
+            "insurance": "Expired"
+        }
+    },
+    {
+        "id": "RD-005",
+        "name": "Casey Hunt",
+        "email": "casey.h@medeasy-rider.com",
+        "phone": "+1 (555) 015-6677",
+        "vehicleType": "E-Bike",
+        "vehicleNumber": "EB-1234-SF",
+        "status": "Pending",
+        "verification": "Pending",
+        "rating": 0.0,
+        "ordersCompleted": 0,
+        "earnings": 0.00,
+        "lat": 37.7750,
+        "lng": -122.4180,
+        "joinedDate": "2026-07-03",
+        "documents": {
+            "license": "Verified",
+            "backgroundCheck": "Pending",
+            "insurance": "Verified"
+        }
+    }
+]

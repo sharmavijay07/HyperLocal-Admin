@@ -1,0 +1,42 @@
+[
+    {
+        "id": "CUST-001",
+        "name": "Alice Johnson",
+        "email": "alice.j@example.com",
+        "phone": "+1 (555) 019-1122",
+        "address": "123 Maple St, Springfield",
+        "status": "Active"
+    },
+    {
+        "id": "CUST-002",
+        "name": "Bob Miller",
+        "email": "bob.m@example.com",
+        "phone": "+1 (555) 012-3344",
+        "address": "789 Pine Ave, San Francisco",
+        "status": "Active"
+    },
+    {
+        "id": "CUST-003",
+        "name": "Charlie Davis",
+        "email": "charlie.d@example.com",
+        "phone": "+1 (555) 015-5566",
+        "address": "456 Elm St, Springfield",
+        "status": "Active"
+    },
+    {
+        "id": "CUST-004",
+        "name": "Diana Prince",
+        "email": "diana.p@example.com",
+        "phone": "+1 (555) 017-7788",
+        "address": "1001 Broadway, New York",
+        "status": "Active"
+    },
+    {
+        "id": "CUST-005",
+        "name": "Ethan Hunt",
+        "email": "ethan.h@example.com",
+        "phone": "+1 (555) 018-8899",
+        "address": "222 Mission St, San Francisco",
+        "status": "Active"
+    }
+]

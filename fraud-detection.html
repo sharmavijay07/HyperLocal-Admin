@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MedEasy Enterprise Portal | Fraud Detection</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/tables.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- JS Modules -->
+    <script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/navigation.js"></script>
+</head>
+
+<body class="text-on-background bg-background">
+    <!-- TopNavBar Shell -->
+    <header id="navbar-container"></header>
+
+    <div class="flex">
+        <!-- SideNav Shell -->
+        <aside id="sidebar-container"></aside>
+
+        <!-- Main Content Area -->
+        <main class="ml-0 md:ml-64 w-full p-6 md:p-10 space-y-6 overflow-x-hidden">
+            <!-- Header Section -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h1 class="font-headline-md text-headline-md font-bold text-primary">Fraud & Risk Detection</h1>
+                    <p class="text-body-sm text-secondary text-xs">Monitor high-risk orders, flag suspicious patterns,
+                        and manage blacklist rules</p>
+                </div>
+                <button onclick="window.location.href='blacklist.html'" class="btn btn-secondary text-xs py-2">
+                    <span class="material-symbols-outlined text-sm">block</span>
+                    Manage Blacklist
+                </button>
+            </div>
+
+            <!-- Risk Overview Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant">
+                    <p class="text-xs text-secondary font-bold uppercase tracking-wider">High Risk Flagged</p>
+                    <h3 class="text-2xl font-bold text-error mt-1">2 Orders</h3>
+                </div>
+                <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant">
+                    <p class="text-xs text-secondary font-bold uppercase tracking-wider">Medium Risk Flagged</p>
+                    <h3 class="text-2xl font-bold text-amber-500 mt-1">4 Orders</h3>
+                </div>
+                <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant">
+                    <p class="text-xs text-secondary font-bold uppercase tracking-wider">Auto-Cancelled (Fraud)</p>
+                    <h3 class="text-2xl font-bold text-primary mt-1">12 Orders</h3>
+                </div>
+            </div>
+
+            <!-- High Risk Orders Table -->
+            <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden">
+                <div class="p-6 border-b border-outline-variant">
+                    <h3 class="font-bold text-base">Flagged Orders Queue</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-surface-container-low text-secondary font-label-sm uppercase tracking-wider text-xs">
+                                <th class="px-6 py-4">Order ID</th>
+                                <th class="px-6 py-4">Customer</th>
+                                <th class="px-6 py-4">Pharmacy</th>
+                                <th class="px-6 py-4">Risk Reason</th>
+                                <th class="px-6 py-4">Risk Level</th>
+                                <th class="px-6 py-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant" id="fraud-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tbody = document.getElementById('fraud-tbody');
+            if (!tbody) return;
+
+            const orders = window.AppStorage.get('orders') || [];
+            const flaggedOrders = orders.filter(o => o.riskScore === 'High' || o.riskScore === 'Medium');
+
+            tbody.innerHTML = '';
+
+            if (flaggedOrders.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="text-center py-8 text-secondary">No flagged orders in queue.</td></tr>`;
+                return;
+            }
+
+            flaggedOrders.forEach(o => {
+                let badgeClass = 'badge-pending';
+                if (o.riskScore === 'High') badgeClass = 'badge-suspended';
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-surface-container-low transition-colors';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 font-bold text-primary">${o.id}</td>
+                    <td class="px-6 py-4 font-semibold">${o.customerName}</td>
+                    <td class="px-6 py-4">${o.pharmacyName}</td>
+                    <td class="px-6 py-4 text-xs text-secondary">${o.riskReason}</td>
+                    <td class="px-6 py-4">
+                        <span class="badge ${badgeClass}">${o.riskScore}</span>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <div class="flex justify-end gap-2">
+                            <button onclick="resolveOrder('${o.id}', 'Approved')" class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary-container transition-colors">
+                                Approve
+                            </button>
+                            <button onclick="resolveOrder('${o.id}', 'Cancelled')" class="bg-error text-on-error px-3 py-1.5 rounded-lg text-xs font-bold hover:opacity-90 transition-colors">
+                                Cancel Order
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+
+        function resolveOrder(id, decision) {
+            window.AppStorage.updateInList('orders', id, {
+                status: decision,
+                riskScore: 'Low',
+                riskReason: 'Resolved by Admin'
+            });
+
+            window.AppStorage.logAction('Resolve Fraud Flag', `Order ${id} fraud flag resolved with status: ${decision}`);
+            window.UI.showToast(`Order ${id} has been ${decision.toLowerCase()}.`, 'success');
+
+            // Reload page
+            setTimeout(() => window.location.reload(), 1000);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MedEasy Enterprise Portal | Dashboard</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/tables.css" />
+    <link rel="stylesheet" href="css/charts.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- JS Modules -->
+    <script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/dashboard.js"></script>
+</head>
+
+<body class="text-on-background bg-background">
+    <!-- TopNavBar Shell -->
+    <header id="navbar-container"></header>
+
+    <div class="flex">
+        <!-- SideNav Shell -->
+        <aside id="sidebar-container"></aside>
+
+        <!-- Main Content Area -->
+        <main class="ml-0 md:ml-64 w-full p-6 md:p-10 space-y-6 overflow-x-hidden">
+            <!-- KPI Section -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant card-lift">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-primary/10 text-primary rounded-lg">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </div>
+                        <span class="text-primary font-label-sm font-bold">+12%</span>
+                    </div>
+                    <p class="font-label-md text-secondary uppercase tracking-wider text-xs">Total Orders</p>
+                    <h3 class="font-headline-lg text-headline-lg mt-1 font-bold" id="kpi-total-orders">-</h3>
+                </div>
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant card-lift">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-primary/10 text-primary rounded-lg">
+                            <span class="material-symbols-outlined">local_pharmacy</span>
+                        </div>
+                        <span class="text-primary font-label-sm font-bold">+4</span>
+                    </div>
+                    <p class="font-label-md text-secondary uppercase tracking-wider text-xs">Active Pharmacies</p>
+                    <h3 class="font-headline-lg text-headline-lg mt-1 font-bold" id="kpi-active-pharmacies">-</h3>
+                </div>
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant card-lift">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-primary/10 text-primary rounded-lg">
+                            <span class="material-symbols-outlined">motorcycle</span>
+                        </div>
+                        <span class="text-error font-label-sm font-bold">-2%</span>
+                    </div>
+                    <p class="font-label-md text-secondary uppercase tracking-wider text-xs">Active Riders</p>
+                    <h3 class="font-headline-lg text-headline-lg mt-1 font-bold" id="kpi-active-riders">-</h3>
+                </div>
+                <div
+                    class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant card-lift">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-primary/10 text-primary rounded-lg">
+                            <span class="material-symbols-outlined">payments</span>
+                        </div>
+                        <span class="text-primary font-label-sm font-bold">+18%</span>
+                    </div>
+                    <p class="font-label-md text-secondary uppercase tracking-wider text-xs">Revenue Today</p>
+                    <h3 class="font-headline-lg text-headline-lg mt-1 font-bold" id="kpi-revenue">-</h3>
+                </div>
+                <div onclick="window.location.href='pharmacy-verification.html'"
+                    class="bg-primary text-on-primary p-6 rounded-2xl shadow-lg border border-primary-container relative overflow-hidden cursor-pointer hover:opacity-95 transition-opacity">
+                    <div class="relative z-10">
+                        <p class="font-label-md opacity-80 uppercase tracking-wider text-xs">Verification Queue</p>
+                        <h3 class="font-headline-lg text-headline-lg mt-1 font-bold" id="kpi-verification-queue">-</h3>
+                        <p class="text-body-sm mt-2 opacity-90 underline text-xs">Review items now</p>
+                    </div>
+                    <span
+                        class="material-symbols-outlined absolute -right-4 -bottom-4 text-[80px] opacity-10">verified_user</span>
+                </div>
+            </div>
+
+            <!-- Main Interactive Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Live Delivery Map -->
+                <div
+                    class="lg:col-span-2 bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden h-[500px] flex flex-col">
+                    <div class="p-6 border-b border-outline-variant flex justify-between items-center">
+                        <div>
+                            <h4 class="font-headline-sm text-headline-sm font-bold">Live Delivery Map</h4>
+                            <p class="text-body-sm text-secondary text-xs">Real-time rider locations across the metro
+                                area</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <span
+                                class="inline-flex items-center gap-1.5 font-label-sm text-primary px-3 py-1 bg-primary/10 rounded-full text-xs font-bold">
+                                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                                42 Active Trips
+                            </span>
+                        </div>
+                    </div>
+                    <div class="relative flex-grow bg-[#F1F5F9] dark:bg-slate-800">
+                        <!-- SVG Map Mockup -->
+                        <svg class="w-full h-full" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 50 Q 200 20 350 80 T 600 50 T 750 150 T 600 350 T 150 320 T 50 200 Z"
+                                fill="none" stroke="#CBD5E1" stroke-width="2"></path>
+                            <path d="M100 100 L 700 300 M 200 50 L 200 350 M 50 200 L 750 200" stroke="#CBD5E1"
+                                stroke-dasharray="4 4" stroke-width="1"></path>
+                            <!-- Rider Dots -->
+                            <circle class="map-dot fill-primary" cx="200" cy="150" r="6"></circle>
+                            <circle class="map-dot fill-primary" cx="450" cy="220" r="6"></circle>
+                            <circle class="map-dot fill-primary" cx="580" cy="110" r="6"></circle>
+                            <circle class="map-dot fill-primary" cx="310" cy="310" r="6"></circle>
+                            <circle class="map-dot fill-primary" cx="620" cy="280" r="6"></circle>
+                            <!-- Pharmacy Locations -->
+                            <rect fill="#006933" height="10" rx="2" width="10" x="345" y="75"></rect>
+                            <rect fill="#006933" height="10" rx="2" width="10" x="595" y="345"></rect>
+                            <rect fill="#006933" height="10" rx="2" width="10" x="95" y="195"></rect>
+                        </svg>
+                        <!-- Map Overlay Info -->
+                        <div class="absolute bottom-4 left-4 space-y-2">
+                            <div
+                                class="bg-white/90 dark:bg-slate-900/90 backdrop-blur p-3 rounded-xl border border-outline-variant shadow-sm text-body-sm flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-primary">local_shipping</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-xs">Trip #9421</p>
+                                    <p class="text-secondary text-[10px]">Arriving in 4 mins</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Side Info Cards -->
+                <div class="space-y-6 flex flex-col">
+                    <!-- Orders Trend -->
+                    <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant flex-grow">
+                        <h4 class="font-label-md text-secondary uppercase tracking-widest mb-4 text-xs font-bold">Orders
+                            Trend</h4>
+                        <div class="h-32 flex items-end gap-1">
+                            <!-- Visual Chart Mockup -->
+                            <svg class="w-full h-full" viewBox="0 0 200 80">
+                                <path class="chart-path" d="M0 60 Q 25 70 50 40 T 100 30 T 150 50 T 200 10" fill="none"
+                                    stroke="#006933" stroke-linecap="round" stroke-width="3"></path>
+                                <path d="M0 60 Q 25 70 50 40 T 100 30 T 150 50 T 200 10 L 200 80 L 0 80 Z"
+                                    fill="url(#grad)" opacity="0.1"></path>
+                                <defs>
+                                    <linearGradient id="grad" x1="0%" x2="0%" y1="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#006933;stop-opacity:1"></stop>
+                                        <stop offset="100%" style="stop-color:#006933;stop-opacity:0"></stop>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="flex justify-between mt-4">
+                            <div class="text-center">
+                                <p class="text-headline-sm font-bold text-sm">1.2k</p>
+                                <p class="text-[10px] text-secondary">Mon</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-headline-sm font-bold text-sm">1.8k</p>
+                                <p class="text-[10px] text-secondary">Tue</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-headline-sm font-bold text-primary text-sm">2.4k</p>
+                                <p class="text-[10px] text-secondary">Today</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Top Performing Pharmacies -->
+                    <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant">
+                        <h4 class="font-label-md text-secondary uppercase tracking-widest mb-4 text-xs font-bold">Top
+                            Pharmacies</h4>
+                        <div class="space-y-4" id="top-pharmacies-container">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lower Section: Tables and Activities -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- Recent Orders Table -->
+                <div
+                    class="lg:col-span-3 bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden">
+                    <div class="p-6 border-b border-outline-variant flex justify-between items-center">
+                        <h4 class="font-headline-sm text-headline-sm font-bold">Recent Orders</h4>
+                        <button onclick="window.location.href='order-monitoring.html'"
+                            class="text-primary font-label-md flex items-center gap-1 text-sm font-bold">
+                            View All <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr
+                                    class="bg-surface-container-low text-secondary font-label-sm uppercase tracking-wider text-xs">
+                                    <th class="px-6 py-4">Order ID</th>
+                                    <th class="px-6 py-4">Customer</th>
+                                    <th class="px-6 py-4">Pharmacy</th>
+                                    <th class="px-6 py-4">Status</th>
+                                    <th class="px-6 py-4 text-right">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-outline-variant" id="recent-orders-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Recent Activities -->
+                <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant flex flex-col">
+                    <h4 class="font-headline-sm text-headline-sm mb-6 font-bold">Recent Activities</h4>
+                    <div class="flex-grow space-y-6 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-outline-variant"
+                        id="recent-activities-container">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Floating Action for Quick Access -->
+    <button onclick="window.location.href='order-monitoring.html'"
+        class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-105 transition-transform active:scale-95 z-50">
+        <span class="material-symbols-outlined">add</span>
+    </button>
+</body>
+
+</html>
