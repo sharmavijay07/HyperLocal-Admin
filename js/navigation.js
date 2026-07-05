@@ -6,6 +6,7 @@ const Navigation = {
         { name: 'Dashboard', url: 'dashboard.html', icon: 'dashboard' },
         { name: 'Pharmacies', url: 'pharmacy-management.html', icon: 'local_pharmacy' },
         { name: 'Riders', url: 'rider-management.html', icon: 'delivery_dining' },
+        { name: 'Users', url: 'user-management.html', icon: 'group' },
         { name: 'Live Monitoring', url: 'order-monitoring.html', icon: 'monitoring' },
         { name: 'Analytics', url: 'reports.html', icon: 'analytics' },
         { name: 'Fraud Detection', url: 'fraud-detection.html', icon: 'security' },
@@ -36,7 +37,10 @@ const Navigation = {
         <button id="mobile-menu-toggle" class="md:hidden text-secondary p-1 hover:bg-surface-container rounded-lg">
           <span class="material-symbols-outlined">menu</span>
         </button>
-        <h1 class="font-headline-md text-headline-md font-bold text-primary cursor-pointer" onclick="window.location.href='dashboard.html'">MedEasy</h1>
+        <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='dashboard.html'">
+          <img src="logo.png" alt="Logo" class="h-8 w-8 object-contain rounded-lg border border-outline-variant/30" onerror="this.style.display='none'" />
+          <h1 class="font-headline-md text-headline-md font-bold text-primary">MedEasy</h1>
+        </div>
         <div class="hidden md:flex items-center bg-surface-container rounded-full px-4 py-2 w-80 border border-outline-variant/30">
           <span class="material-symbols-outlined text-outline mr-2">search</span>
           <input id="global-search" class="bg-transparent border-none focus:ring-0 text-body-sm w-full p-0" placeholder="Search pharmacy, rider, order..." type="text" />
@@ -82,7 +86,7 @@ const Navigation = {
 
         const currentPath = window.location.pathname.split('/').pop() || 'dashboard.html';
 
-        sidebarContainer.className = "flex flex-col fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface-container-low border-r border-outline-variant transition-transform duration-300 z-40 md:translate-x-0 -translate-x-full";
+        sidebarContainer.className = "flex flex-col fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-primary text-on-primary border-r border-primary/20 transition-transform duration-300 z-40 md:translate-x-0 -translate-x-full";
 
         let navHtml = `<nav class="p-4 space-y-1 flex-grow">`;
 
@@ -93,8 +97,8 @@ const Navigation = {
                 (item.url === 'rider-management.html' && currentPath === 'rider-verification.html');
 
             const activeClass = isActive
-                ? 'flex items-center gap-3 px-4 py-3 text-primary font-bold border-r-4 border-primary bg-surface-container-high transition-all active'
-                : 'flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-high hover:text-primary transition-colors';
+                ? 'flex items-center gap-3 px-4 py-3 text-primary bg-surface-container-lowest font-bold border-l-4 border-primary-fixed transition-all active rounded-lg'
+                : 'flex items-center gap-3 px-4 py-3 text-primary-fixed/80 hover:bg-primary-container/30 hover:text-white transition-colors rounded-lg';
 
             navHtml += `
         <a class="${activeClass}" href="${item.url}">
@@ -108,13 +112,13 @@ const Navigation = {
 
         // System Health Card at the bottom of sidebar
         navHtml += `
-      <div class="p-4 border-t border-outline-variant mt-auto">
-        <div class="bg-primary/10 rounded-2xl p-4">
-          <p class="font-label-sm text-primary mb-1 font-bold">System Health</p>
-          <div class="h-1.5 w-full bg-outline-variant rounded-full overflow-hidden">
-            <div class="h-full bg-primary w-11/12"></div>
+      <div class="p-4 border-t border-primary-container/30 mt-auto">
+        <div class="bg-primary-container/20 rounded-2xl p-4">
+          <p class="font-label-sm text-white mb-1 font-bold">System Health</p>
+          <div class="h-1.5 w-full bg-primary/30 rounded-full overflow-hidden">
+            <div class="h-full bg-primary-fixed w-11/12"></div>
           </div>
-          <p class="font-label-sm text-secondary mt-2 text-xs">All services active</p>
+          <p class="font-label-sm text-primary-fixed/80 mt-2 text-xs">All services active</p>
         </div>
       </div>
     `;
@@ -130,13 +134,13 @@ const Navigation = {
         if (toggleBtn && sidebar) {
             toggleBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                sidebar.classList.toggle('-translate-x-full');
+                sidebar.classList.toggle('open');
             });
 
             // Close sidebar when clicking outside on mobile
             document.addEventListener('click', (e) => {
                 if (window.innerWidth < 768 && !sidebar.contains(e.target) && e.target !== toggleBtn) {
-                    sidebar.classList.add('-translate-x-full');
+                    sidebar.classList.remove('open');
                 }
             });
         }

@@ -443,6 +443,14 @@ const AppStorage = {
     // Initialize storage
     async init() {
         const keys = ['pharmacies', 'riders', 'orders', 'customers', 'analytics', 'notifications'];
+        const fileNames = {
+            pharmacies: 'pharmacies',
+            riders: 'riders',
+            orders: 'orders',
+            customers: 'users', // Fetch from users.json on disk
+            analytics: 'analytics',
+            notifications: 'notifications'
+        };
 
         // Check if running under file:// protocol
         const isFileProtocol = window.location.protocol === 'file:';
@@ -454,7 +462,7 @@ const AppStorage = {
                     localStorage.setItem(key, JSON.stringify(this.fallbackData[key]));
                 } else {
                     try {
-                        const response = await fetch(`./data/${key}.json`);
+                        const response = await fetch(`./data/${fileNames[key]}.json`);
                         if (response.ok) {
                             const data = await response.json();
                             localStorage.setItem(key, JSON.stringify(data));

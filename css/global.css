@@ -35,25 +35,25 @@
   --on-error: #ffffff;
   --on-error-container: #93000a;
 
-  /* Background and Surface tinted with green-white tint */
-  --background: #f4f9f5;
-  --on-background: #111d15;
+  /* Background and Surface tinted with a fresh green-white tint */
+  --background: #f1f9f3;
+  --on-background: #0a2512;
 
-  --surface: #f4f9f5;
-  --surface-dim: #d6ded8;
-  --surface-bright: #f4f9f5;
+  --surface: #f1f9f3;
+  --surface-dim: #cfebd6;
+  --surface-bright: #f1f9f3;
   --surface-container-lowest: #ffffff;
-  --surface-container-low: #ecf3ee;
-  --surface-container: #e2ece5;
-  --surface-container-high: #d8e6dc;
-  --surface-container-highest: #cedfd3;
-  --on-surface: #111d15;
-  --on-surface-variant: #3e4a3e;
+  --surface-container-low: #e8f5ec;
+  --surface-container: #d9ebdcf0;
+  --surface-container-high: #cbe2d1;
+  --surface-container-highest: #bcdac4;
+  --on-surface: #0a2512;
+  --on-surface-variant: #284c32;
 
-  --outline: #6f7d73;
-  --outline-variant: #becbc1;
-  --inverse-surface: #2d312e;
-  --inverse-on-surface: #eff1ee;
+  --outline: #5c8567;
+  --outline-variant: #aacfbc;
+  --inverse-surface: #1e3523;
+  --inverse-on-surface: #f1f9f3;
   --inverse-primary: #71dc8e;
   --surface-tint: #006d35;
 
