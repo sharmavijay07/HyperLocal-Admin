@@ -1,0 +1,72 @@
+[
+  {
+    "id": "PHAR-101",
+    "username": "pharmacy1",
+    "password": "password123",
+    "name": "City Medicos",
+    "owner": "Dr. Sarah Connor",
+    "email": "sarah@citymedicos.com",
+    "phone": "+1 555-9081",
+    "license": "DL-90871-A",
+    "address": "101 Health Blvd, Suite B",
+    "status": "Active",
+    "lat": 12.9716,
+    "lng": 77.5946,
+    "medicines": [
+      {
+        "id": "MED-1001",
+        "name": "Paracetamol",
+        "description": "Pain reliever and fever reducer",
+        "price": 4.5,
+        "expiryDate": "2026-12-31",
+        "quantity": 150,
+        "mfgDate": "2025-01-01",
+        "composition": "Paracetamol 500mg",
+        "category": "Analgesics",
+        "imagePath": "/images/meds/paracetamol.jpg",
+        "pharmacyId": "PHAR-101"
+      },
+      {
+        "id": "MED-1002",
+        "name": "Amoxicillin",
+        "description": "Broad-spectrum antibiotic",
+        "price": 12.0,
+        "expiryDate": "2026-07-28",
+        "quantity": 80,
+        "mfgDate": "2025-02-01",
+        "composition": "Amoxicillin trihydrate 250mg",
+        "category": "Antibiotics",
+        "imagePath": "/images/meds/amoxicillin.jpg",
+        "pharmacyId": "PHAR-101"
+      },
+      {
+        "id": "MED-1003",
+        "name": "Cough Syrup",
+        "description": "Soothing liquid cough relief",
+        "price": 7.5,
+        "expiryDate": "2026-08-15",
+        "quantity": 40,
+        "mfgDate": "2025-03-01",
+        "composition": "Dextromethorphan HBr 15mg",
+        "category": "Antitussives",
+        "imagePath": "/images/meds/coughsyrup.jpg",
+        "pharmacyId": "PHAR-101"
+      }
+    ]
+  },
+  {
+    "id": "PHAR-102",
+    "username": "pharmacy2",
+    "password": "password123",
+    "name": "Care Pharmacy",
+    "owner": "Dr. Bruce Wayne",
+    "email": "bruce@carepharmacy.com",
+    "phone": "+1 555-0988",
+    "license": "DL-11223-B",
+    "address": "402 Gotham Way",
+    "status": "Pending",
+    "lat": 12.9816,
+    "lng": 77.6046,
+    "medicines": []
+  }
+]

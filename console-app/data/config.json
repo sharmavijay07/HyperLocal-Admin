@@ -1,0 +1,8 @@
+{
+  "deliveryRadius": 10.0,
+  "baseDeliveryCharge": 5.0,
+  "chargePerKm": 1.5,
+  "commissionRate": 10.0,
+  "autoAssignRiders": true,
+  "maxRiderDistance": 5.0
+}

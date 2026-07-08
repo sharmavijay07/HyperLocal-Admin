@@ -1,0 +1,40 @@
+[
+  {
+    "id": "RIDE-101",
+    "username": "rider1",
+    "password": "password123",
+    "name": "David Miller",
+    "email": "david.m@delivery.com",
+    "phone": "+1 555-0012",
+    "vehicleType": "Motorcycle",
+    "vehicleNumber": "KA-01-EF-1234",
+    "status": "Active",
+    "aadhaar": "1234-5678-9012",
+    "licenseNo": "DL-0420210034",
+    "bikePapers": "RC-Book-KA01EF1234.pdf",
+    "lat": 12.9720,
+    "lng": 77.5950,
+    "availability": true,
+    "earnings": 45.0,
+    "credits": 20.0
+  },
+  {
+    "id": "RIDE-102",
+    "username": "rider2",
+    "password": "password123",
+    "name": "Emily Watson",
+    "email": "emily@delivery.com",
+    "phone": "+1 555-0045",
+    "vehicleType": "Bicycle",
+    "vehicleNumber": "NONE",
+    "status": "Pending",
+    "aadhaar": "9876-5432-1098",
+    "licenseNo": "NONE",
+    "bikePapers": "Cycle-Invoice-102.pdf",
+    "lat": 12.9820,
+    "lng": 77.6050,
+    "availability": false,
+    "earnings": 0.0,
+    "credits": 0.0
+  }
+]

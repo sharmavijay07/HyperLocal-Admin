@@ -1,0 +1,37 @@
+[
+  {
+    "id": "ORD-1001",
+    "customerId": "CUST-101",
+    "customerName": "Jane Doe",
+    "customerPhone": "+1 555-0199",
+    "pharmacyId": "PHAR-101",
+    "pharmacyName": "City Medicos",
+    "riderId": "RIDE-101",
+    "riderName": "David Miller",
+    "status": "Delivered",
+    "total": 21.0,
+    "items": [
+      {
+        "medicineId": "MED-1001",
+        "name": "Paracetamol",
+        "qty": 2,
+        "price": 4.5
+      },
+      {
+        "medicineId": "MED-1003",
+        "name": "Cough Syrup",
+        "qty": 1,
+        "price": 7.5
+      }
+    ],
+    "orderTime": "2026-07-08 14:30",
+    "eta": 0,
+    "address": "123 Maple St, Sector 4",
+    "paymentMethod": "UPI",
+    "riskScore": "Low",
+    "riskReason": "Normal order behavior",
+    "customerNote": "Leave at front door",
+    "otp": "4891",
+    "otpValidated": true
+  }
+]

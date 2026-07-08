@@ -1,0 +1,17 @@
+# Java compilation outputs
+console-app/bin/
+*.class
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.iml
+*.project
+*.classpath
+*.settings/
+.qodo/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+desktop.ini
